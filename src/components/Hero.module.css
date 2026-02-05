@@ -382,3 +382,54 @@
         padding: var(--space-1) var(--space-3);
     }
 }
+
+/* Performance: Reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+
+    .gradientOrb1,
+    .gradientOrb2,
+    .gradientOrb3 {
+        animation: none;
+    }
+
+    .note {
+        animation: none;
+    }
+
+    .waveBar {
+        animation: none;
+        height: 50px;
+    }
+
+    .badgeDot {
+        animation: none;
+    }
+
+    .scrollIndicator {
+        animation: none;
+    }
+
+    .wheel {
+        animation: none;
+    }
+
+    .content,
+    .badge,
+    .title,
+    .subtitle,
+    .cta,
+    .stats {
+        animation: none;
+    }
+}
+
+/* Hide heavy decorative elements on mobile for faster rendering */
+@media (max-width: 480px) {
+    .soundWave {
+        display: none;
+    }
+
+    .gradientOrb3 {
+        display: none;
+    }
+}
