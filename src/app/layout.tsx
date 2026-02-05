@@ -10,16 +10,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: SEO.title,
+  metadataBase: new URL(SEO.url),
+  title: {
+    default: SEO.title,
+    template: `%s | ${SEO.title}`,
+  },
   description: SEO.description,
   keywords: SEO.keywords,
   authors: [{ name: SEO.author }],
   openGraph: {
     title: SEO.title,
     description: SEO.description,
-    type: "website",
-    locale: "en_US",
+    url: SEO.url,
     siteName: SEO.title.split(' | ')[0],
+    locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
@@ -29,6 +34,16 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: SEO.url,
   },
 };
 

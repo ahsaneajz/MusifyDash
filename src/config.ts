@@ -312,4 +312,5 @@ export const SEO = {
     keywords: ['Discord', 'Music Bot', 'Spotify', 'Discord Bot', 'Music Streaming', 'Musify'],
     author: 'FizzyStudio',
     themeColor: '#1db954',
+    url: 'https://musify-dashboard.vercel.app', // TODO: Replace with your actual domain
 };
