@@ -1,0 +1,450 @@
+/* ===== DESIGN SYSTEM - Musify Music Bot Dashboard ===== */
+
+:root {
+  /* Colors - Dark Theme with Green Accents (Spotify-inspired) */
+  --bg-primary: #0a0f0a;
+  --bg-secondary: #121a12;
+  --bg-tertiary: #1a251a;
+  --bg-card: rgba(25, 35, 25, 0.7);
+  --bg-glass: rgba(255, 255, 255, 0.03);
+
+  --accent-primary: #1db954;
+  --accent-secondary: #1ed760;
+  --accent-tertiary: #15a043;
+  --accent-gradient: linear-gradient(135deg, #1db954 0%, #1ed760 50%, #15a043 100%);
+  --accent-glow: 0 0 40px rgba(29, 185, 84, 0.4);
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(29, 185, 84, 0.3);
+
+  /* Spotify Green for music elements */
+  --spotify-green: #1db954;
+
+  /* Status Colors */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* Typography */
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Spacing Scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --space-12: 5rem;
+  --space-16: 8rem;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Container widths */
+  --max-width: 1400px;
+  --content-width: 1200px;
+}
+
+/* ===== RESET & BASE ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Background with animated gradient */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% -20%, rgba(29, 185, 84, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(30, 215, 96, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 30% at 50% 50%, rgba(21, 160, 67, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  animation: bgPulse 15s ease-in-out infinite alternate;
+}
+
+@keyframes bgPulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+}
+
+a {
+  color: var(--accent-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--text-primary);
+}
+
+/* ===== UTILITY CLASSES ===== */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+.section {
+  padding: var(--space-16) 0;
+  position: relative;
+}
+
+.gradient-text {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-card {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  transition: all var(--transition-base);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-glow);
+  transform: translateY(-4px);
+  box-shadow: var(--accent-glow);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--accent-gradient);
+  color: white;
+  box-shadow: 0 4px 20px rgba(29, 185, 84, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(29, 185, 84, 0.5);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-primary);
+  background: rgba(29, 185, 84, 0.1);
+}
+
+.btn-lg {
+  padding: var(--space-4) var(--space-8);
+  font-size: 1.125rem;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes waveform {
+
+  0%,
+  100% {
+    height: 20%;
+  }
+
+  50% {
+    height: 100%;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Scroll-triggered animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 {
+  transition-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+  transition-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+  transition-delay: 0.3s;
+}
+
+.reveal-delay-4 {
+  transition-delay: 0.4s;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-secondary);
+}
+
+/* ===== RESPONSIVE UTILITIES ===== */
+@media (max-width: 1024px) {
+  .section {
+    padding: var(--space-12) 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
+
+  .section {
+    padding: var(--space-10) 0;
+  }
+
+  .btn-lg {
+    padding: var(--space-3) var(--space-6);
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: var(--space-8) 0;
+  }
+}
