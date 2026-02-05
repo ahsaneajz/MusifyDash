@@ -16,8 +16,8 @@
 /** Your Discord Bot's Client ID (find in Discord Developer Portal) */
 export const BOT_CLIENT_ID = '1431905222279692371';
 
-/** Discord invite URL with required permissions */
-export const INVITE_URL = `https://discord.com/api/oauth2/authorize?client_id=${BOT_CLIENT_ID}&permissions=3147776&scope=bot%20applications.commands`;
+/** Discord invite URL */
+export const INVITE_URL = `https://discord.com/oauth2/authorize?client_id=${BOT_CLIENT_ID}`;
 
 /** Your Discord support server invite link */
 export const SUPPORT_SERVER = 'https://discord.gg/F5yKuwZfhJ';
