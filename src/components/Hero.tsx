@@ -30,7 +30,7 @@ export default function Hero() {
                         const statElements = entry.target.querySelectorAll('[data-count]');
                         statElements.forEach((el) => {
                             const target = parseInt(el.getAttribute('data-count') || '0');
-                            animateValue(el as HTMLElement, 0, target, 2000);
+                            animateValue(el as HTMLElement, 0, target, 800);
                         });
                         observer.unobserve(entry.target);
                     }
@@ -56,16 +56,16 @@ export default function Hero() {
 
                 {/* Floating Music Notes */}
                 <div className={styles.floatingNotes}>
-                    {[...Array(8)].map((_, i) => (
-                        <span key={i} className={styles.note} style={{ '--delay': `${i * 0.5}s` } as React.CSSProperties}>
-                            {['♪', '♫', '♬', '♩'][i % 4]}
+                    {[...Array(4)].map((_, i) => (
+                        <span key={i} className={styles.note} style={{ '--delay': `${i * 0.3}s` } as React.CSSProperties}>
+                            {['♪', '♫', '♬', '♩'][i]}
                         </span>
                     ))}
                 </div>
 
                 {/* Sound Wave Animation */}
                 <div className={styles.soundWave}>
-                    {[...Array(20)].map((_, i) => (
+                    {[...Array(10)].map((_, i) => (
                         <div key={i} className={styles.waveBar} style={{ '--i': i } as React.CSSProperties}></div>
                     ))}
                 </div>
