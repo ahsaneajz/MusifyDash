@@ -62,8 +62,8 @@ export default function Stats() {
     }, []);
 
     const animateCounters = () => {
-        const duration = 2000;
-        const steps = 60;
+        const duration = 800;
+        const steps = 30;
         const stepDuration = duration / steps;
 
         let currentStep = 0;
